@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Adoption Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow text-center p-5">
+
+        <div class="mb-3">
+            <i class="fa-solid fa-circle-check text-success"
+               style="font-size: 70px;"></i>
+        </div>
+
+        <h2 class="text-success mb-3">
+            Adoption Request Submitted!
+        </h2>
+
+        <p class="lead">
+            Thank you for choosing to adopt a pet from Pet Rescue.
+        </p>
+
+        <p>
+            Your adoption request has been successfully submitted.
+            Our team will review your application and contact you soon.
+        </p>
+
+        <p class="text-muted">
+            Your request is currently pending approval.
+        </p>
+
+        <div class="mt-4">
+            <a asp-area="Customer"
+               asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-primary">
+                <i class="fa-solid fa-house"></i>
+                Back to Home
+            </a>
+        </div>
+
+    </div>
+</div>

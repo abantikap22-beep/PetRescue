@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PetRescue.Models.PetType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-info">Pet Type List</h2>
+    </div>
+
+    <div class="col-md-6 text-end">
+        <a asp-action="Create" class="btn btn-info">
+            &nbsp; <i class="fa-regular fa-plus"></i> New Pet Type
+        </a>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <table class="table table-striped table-bordered">
+
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(c => c.PetTypeName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PetTypeName</td>
+
+                <partial name="_ButtonPartial"
+                         model="item.PetTypeId" />
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts {
+
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+    <script>
+        $(function () {
+
+            var save = @Html.Raw(
+                            System.Text.Json.JsonSerializer.Serialize(TempData["save"])
+                    );
+
+        if (save) {
+            alertify.success(save);
+        }
+
+        });
+    </script>
+}

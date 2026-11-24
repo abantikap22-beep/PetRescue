@@ -1,0 +1,130 @@
+﻿@model PetRescue.Models.AdoptionRequest
+
+@{
+    ViewData["Title"] = "Adoption Request";
+    var pet = ViewBag.Pet as PetRescue.Models.Pet;
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold mb-1">Adoption Request</h2>
+        <p class="text-muted mb-0">Tell us a little about yourself so we can find the right match.</p>
+    </div>
+
+    <div class="row g-4">
+
+        @if (pet != null)
+        {
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    @if (!string.IsNullOrEmpty(pet.ImageUrl))
+                    {
+                        <div class="bg-light text-center border-bottom">
+                            <img src="@Url.Content("~/" + pet.ImageUrl)"
+                                 alt="@pet.Breed"
+                                 class="img-fluid"
+                                 style="width:100%; height:260px; object-fit:contain;" />
+                        </div>
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">@pet.Breed</h5>
+
+                        @if (!string.IsNullOrEmpty(pet.Description))
+                        {
+                            <p class="card-text text-muted small mb-0">@pet.Description</p>
+                        }
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Age</span>
+                            <span>@pet.Age</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Gender</span>
+                            <span>@pet.Gender</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-muted">Location</span>
+                            <span>@pet.Location</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+
+       
+        <div class="@(pet != null ? "col-md-8" : "col-md-8 offset-md-2")">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <form asp-area="Customer"
+                          asp-controller="Adoption"
+                          asp-action="Checkout"
+                          method="post">
+
+                        <input type="hidden" asp-for="PetId" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FullName" class="form-label"></label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Phone" class="form-label"></label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label"></label>
+                            <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Address" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Reason" class="form-label"></label>
+                            <textarea asp-for="Reason" class="form-control" rows="3"
+                                      placeholder="Why would you like to adopt this pet?"></textarea>
+                            <span asp-validation-for="Reason" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input asp-for="HasPetExperience" class="form-check-input" />
+                            <label asp-for="HasPetExperience" class="form-check-label"></label>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary px-4">
+                                Submit Request
+                            </button>
+                            <a asp-area="Customer"
+                               asp-controller="Home"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

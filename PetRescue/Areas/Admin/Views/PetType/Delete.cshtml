@@ -1,0 +1,53 @@
+﻿@model PetRescue.Models.PetType
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<br />
+
+<h2 class="text-info">Delete Pet Type</h2>
+
+<form asp-action="Delete" method="post">
+    <div class="p-4 rounded border">
+
+        <input type="hidden" asp-for="PetTypeId" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger">
+        </div>
+
+        <div class="form-group row mb-3">
+            <div class="col-md-2">
+                <label asp-for="PetTypeName"></label>
+            </div>
+
+            <div class="col-md-5">
+                <input asp-for="PetTypeName"
+                       readonly="readonly"
+                       class="form-control" />
+
+                <span asp-validation-for="PetTypeName"
+                      class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit"
+                   class="btn btn-danger"
+                   value="Delete" />
+
+            <a asp-action="Index"
+               class="btn btn-success">
+                Back to List
+            </a>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,142 @@
+﻿@model PetRescue.Models.Pet
+
+@{
+    ViewData["Title"] = "Delete Pet";
+}
+
+<br />
+
+<h2 class="text-info">Pet Delete</h2>
+
+<form asp-action="Delete"
+      asp-controller="Pets"
+      asp-area="Admin"
+      asp-route-id="@Model.PetId"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="PetId" />
+
+    <div class="p-4 rounded border">
+
+        <div class="row">
+
+            
+            <div class="col-md-8">
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Pet Type</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.PetType?.PetTypeName"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Breed</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.Breed"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Age</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.Age"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Gender</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.Gender"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea readonly
+                                  class="form-control"
+                                  rows="3">@Model.Description</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Location</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.Location"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-2">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input value="@Model.Status"
+                               readonly
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h4>Do you want to delete this pet?</h4>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Delete
+                    </button>
+
+                    <a asp-action="Index"
+                       asp-controller="Pets"
+                       asp-area="Admin"
+                       class="btn btn-success">
+                        Back to List
+                    </a>
+                </div>
+
+            </div>
+
+         
+            <div class="col-md-4 text-center">
+
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Url.Content("~/" + Model.ImageUrl)"
+                         class="img-fluid"
+                         style="max-width:250px; max-height:250px; object-fit:contain;"
+                         alt="Pet Image" />
+                }
+                else
+                {
+                    <p class="text-muted">No image available</p>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</form>
